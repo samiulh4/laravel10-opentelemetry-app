@@ -185,7 +185,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        App\Providers\OpenTelemetryServiceProvider::class,
         /*
          * Application Service Providers...
          */
