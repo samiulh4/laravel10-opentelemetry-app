@@ -25,7 +25,11 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Listen to all events in the application
+        /*Event::listen('*', function (string $eventName, array $eventData) {
+            // You can add logic here to process the events
+            $this->traceEvent($eventName, $eventData);
+        });*/
     }
 
     /**
@@ -34,5 +38,25 @@ class EventServiceProvider extends ServiceProvider
     public function shouldDiscoverEvents(): bool
     {
         return false;
+    }
+
+    protected function traceEvent(string $eventName, array $eventData)
+    {
+        // Create a new span for each event dynamically
+        $tracer = app(\OpenTelemetry\API\Trace\TracerInterface::class);
+        $span = $tracer->spanBuilder($eventName)->startSpan();
+
+        // Set attributes related to the event
+        $span->setAttribute('event.name', $eventName);
+        $span->setAttribute('event.data', json_encode($eventData));
+
+        // Optionally, set more dynamic attributes based on event type
+        if (!empty($eventData) && is_array($eventData)) {
+            foreach ($eventData as $key => $value) {
+                $span->setAttribute("event.data.{$key}", json_encode($value));
+            }
+        }
+
+        $span->end(); // End the span after event handling
     }
 }

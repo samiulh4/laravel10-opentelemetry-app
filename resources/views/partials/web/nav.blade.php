@@ -36,7 +36,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="category.html">Culture</a></li>
+                                <li><a href="{{ url('/web/user-list') }}">Users</a></li>
                                 <li><a href="{{ route('login') }}">Login</a></li>
                                 <li><a href="{{ route('register') }}">Register</a></li>
                             </ul>

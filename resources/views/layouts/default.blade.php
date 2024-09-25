@@ -24,15 +24,9 @@
     <div class="section search-result-wrap">
         <div class="container">
             <div class="row posts-entry">
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     @yield('content')
                 </div>
-                <div class="col-lg-4 sidebar">
-                    @include('partials.web.search-form')
-                    @include('partials.web.popular-posts')
-                    @include('partials.web.sidebar-categories')
-                    @include('partials.web.sidebar-tags')
-                </div><!--./sidebar-->
             </div>
         </div>
     </div><!--./section-->

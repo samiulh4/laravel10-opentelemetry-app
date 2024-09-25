@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Web\WebController;
+use App\Http\Controllers\OpenTelemetryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,5 +19,6 @@ use App\Http\Controllers\Web\WebController;
 Auth::routes();
 
 Route::get('/', [WebController::class, 'index']);
-
+Route::get('/web/user-list', [WebController::class, 'webUserList']);
+Route::get('/zipkin', [OpenTelemetryController::class, 'zipkinIndex']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
